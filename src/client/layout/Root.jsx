@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom"
-import Form from '../features/create/Form'
+import Create from '../features/create/Create'
 
 function Root() {
   
   return (
     <main>
-      <Form />
+      <Create />
       <Outlet />
     </main>
   )
