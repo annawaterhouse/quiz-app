@@ -1,0 +1,33 @@
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Category {
+    id    Int    @id @default(autoincrement())
+    name  String @unique
+    cards Card[]
+}
+
+model Card {
+    id         Int      @id @default(autoincrement())
+    createdAt  DateTime @default(now())
+    question   String   @unique
+    answer     String
+    isSaved    Boolean  @default(false)
+    category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    categoryId Int
+    posts      Post[]
+}
+
+model Post {
+    id         Int      @id @default(autoincrement())
+    cardId Int
+    createdAt  DateTime @default(now())
+    content    String
+    card       Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+}
