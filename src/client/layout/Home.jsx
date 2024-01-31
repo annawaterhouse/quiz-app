@@ -1,25 +1,39 @@
 import { Link } from "react-router-dom";
-import { useGetCardsQuery } from "../features/quiz/quizSlice";
+import { useGetCategoriesQuery } from "./quizSlice";
+import { useDispatch } from "react-redux";
+import { update } from "./quizSlice";
 
-export default function Home() {
-  const { data: cards, error, isLoading } = useGetCardsQuery();
+function CategoryCard({ name, id }) {
+  const categoryName = name.toLowerCase().split(" ").join("");
+  //dynamically render the category cards by storing currently selected in slice
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(update({name, id}));
+    console.log("payload updated from homepage")
+  };
   
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  console.log(cards, "cards");
-
+  return(
+    <li>
+      <Link to={`/${categoryName}`}  onClick={handleClick}>{name}</Link>
+    </li>
+  )
+}
+export default function Home() {
+  const { data: categories, isError, isLoading } = useGetCategoriesQuery();
+  console.log(categories, "homepage categories");
+  
   return (
     <section>
-        <Link to="/ds">Data Structures</Link>
-        <p className="text-3xl font-bold underline">hello</p>
-        <Link to="/js">Javascript</Link>
-        <Link to="/react">React</Link>
+      <h1>Home</h1>
+      {categories && (
+        <ul>
+          {categories.map((cat) => (
+            <CategoryCard key={cat.id} id={cat.id} name={cat.name}/>
+          ))}
+        </ul>
+      )}
+      {isError && <p>{error}</p>}
+      {isLoading && <p>Loading...</p>}
     </section>
   );
 }
