@@ -1,4 +1,4 @@
-export default function Forum() {
+export default function Forum( { categoryCards }) {
     return (
         <section>
             <h1>Chat</h1>
