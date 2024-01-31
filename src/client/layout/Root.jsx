@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom"
-import Create from '../features/create/Create'
+import Nav from "./Nav"
 
 function Root() {
-  
   return (
-    <main>
-      <Create />
-      <Outlet />
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Outlet />
+      </main>
+    </>
   )
 }
 
