@@ -1,6 +1,6 @@
-# Full-stack Template
+# Quiz App
 
-This template provides a fully functional CRUD app. Once a user has successfully registered for an account and logged in, they can see their existing tasks, create new tasks, update existing tasks, and delete tasks.
+A simple web application for study materials.
 
 ## Getting Started
 
@@ -20,28 +20,43 @@ The backend consists of an [Express](https://expressjs.com/) server with a SQLit
 
 API routes can be found in `src/server/api/`.
 
-Authentication is handled with [JWT](https://github.com/auth0/node-jsonwebtoken). User passwords are hashed with [bcrypt](https://github.com/kelektiv/node.bcrypt.js).
-
 ![Database schema as described below](database_schema.svg)
 
 <details>
 <summary>Expand to see DBML</summary>
 
 ```dbml
-Table User {
-  id        Serial  [pk]
-  username  String
-  password  String
-}
+-- CreateTable
+CREATE TABLE "Category" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
 
-Table Task {
-  id          Serial  [pk]
-  description String
-  done        Boolean
-  userId      Int
-}
+-- CreateTable
+CREATE TABLE "Card" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "question" TEXT NOT NULL,
+    "answer" TEXT NOT NULL,
+    "isSaved" BOOLEAN NOT NULL DEFAULT false,
+    "categoryId" INTEGER NOT NULL,
+    CONSTRAINT "Card_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
 
-Ref: User.id < Task.userId
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "cardId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "content" TEXT NOT NULL,
+    CONSTRAINT "Post_cardId_fkey" FOREIGN KEY ("cardId") REFERENCES "Card" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Card_question_key" ON "Card"("question");
 ```
 
 </details>
@@ -56,4 +71,3 @@ Application state is managed with [Redux Toolkit](https://redux-toolkit.js.org/)
 
 [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) is used to handle data fetching. The central API slice is defined in `src/client/store/api.js` and is intended to stay empty. Additional endpoints should be injected separately in `src/client/features`.
 
-[Less](https://lesscss.org/) is used as the CSS preprocessor.

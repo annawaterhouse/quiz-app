@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useGetCategoriesQuery } from "./quizSlice";
 import { useDispatch } from "react-redux";
-import { update } from "./quizSlice";
 
 function LinkCard({ name, id, handleClick }) {
 

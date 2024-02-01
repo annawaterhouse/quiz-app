@@ -1,5 +1,4 @@
 import api from "../store/api";
-import { createSlice } from "@reduxjs/toolkit";
 
 const quizApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -41,5 +40,3 @@ export const {
   useGetCategoriesQuery,
   useGetByCategoryQuery,
 } = quizApi;
-
-
