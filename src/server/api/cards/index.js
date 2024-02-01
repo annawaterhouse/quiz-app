@@ -15,10 +15,16 @@ router.get("/byCategory/:id", async (req, res, next) => {
     
     try {
         const catId = +req.params.id;
-        if (!catId) res.json({ error: "Cannot find ID" });
         const categoryCards = await prisma.card.findMany({
             where: { categoryId: catId },
-        });
+            include: {
+              category: {
+                select: {
+                    name: true,
+                }
+              }, // Include category data in the result
+            },
+          });
         res.json({ data: categoryCards });
     } catch (error) {
         next(error);
@@ -28,11 +34,32 @@ router.get("/byCategory/:id", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
     try {
         const cards = await prisma.card.findMany();
-        res.json({ data: cards });
-    } catch (err) {
-        console.log(err);
-    }
-});
+        const groupedByCategory = cards.reduce((grouped, card) => {
+            const key = card.categoryId;
+            if (!grouped[key]) {
+              grouped[key] = [];
+            }
+            grouped[key].push(card);
+            return grouped;
+          }, {});
+          res.json({
+            status: 200,
+            message: 'Data fetched successfully',
+            data: groupedByCategory
+            });
+        } catch (error) {
+            res.status(500).json({
+              status: 500,
+              message: 'An error occurred while fetching data',
+              error: error.message
+            });
+        }
+    });
+
+
+
+
+
 
 /* create a new card */
 router.post("/create/card", async (req, res, next) => {

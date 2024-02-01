@@ -42,19 +42,4 @@ export const {
   useGetByCategoryQuery,
 } = quizApi;
 
-const categorySlice = createSlice({
-    name: "category",
-    initialState: {
-      name: "",
-      id: null,
-    },
-    reducers: {
-        update: (state, action) => {
-          const { name, id } = action.payload;
-          return {...state, name, id};
-        },
-    },
-});
 
-export const { update } = categorySlice.actions;
-export default categorySlice.reducer;

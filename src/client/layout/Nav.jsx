@@ -6,8 +6,8 @@ import { update } from "./quizSlice";
 function LinkCard({ name, id, handleClick }) {
 
     return(
-      <li onClick={()=>handleClick(name, id)}>
-        <Link to={`/${id}`}>{name}</Link>
+      <li>
+        <Link to={`/${id}`} onClick={()=>handleClick(name, id)}>{name}</Link>
       </li>
     )
 };
@@ -19,7 +19,6 @@ export default function Nav() {
   
   if(isError) console.log("error from nav");
   if(isLoading) console.log("loading from nav");
-  console.log(categories, "homepage categories");
 
   const handleClick = (name, id) => {
     dispatch(update({ name, id }));
@@ -31,12 +30,15 @@ export default function Nav() {
       <h1>Nav</h1>
       {categories && (
         <ul>
-          <li onClick={handleClick}>
-            <Link to="/">Home</Link>
+          <li>
+            <Link to="/" onClick={()=>handleClick(`home`, null)}>Home</Link>
           </li>
           {categories.map((cat) => (
             <LinkCard key={cat.id} id={cat.id} name={cat.name} handleClick={handleClick} />
           ))}
+          <li>
+            <button>+</button>
+          </li>
         </ul>
       )}
     </nav>

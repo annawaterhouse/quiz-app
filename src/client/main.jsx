@@ -4,8 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import Root from './layout/Root'
-import Learn from './features/learn/Learn'
+import Category from './layout/Category'
 import Home from './layout/Home'
+import Form from './features/create/Form'
 
 
 const router = createBrowserRouter([
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/:id", element: <Learn /> },
+      { path: "/:id", element: <Category /> },
+      { path: "/create", element: <Form />}
     ],
   },
 ]);

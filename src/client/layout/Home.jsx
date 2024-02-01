@@ -1,13 +1,17 @@
-import { useGetCategoriesQuery } from "./quizSlice";
-import { useState } from "react";
+import { useGetCardsQuery } from "./quizSlice";
+import List from "./List";
 
 export default function Home() {
-  const [isQuizMode, setQuizMode] = useState(false);
-  const { data: categories, isError, isLoading } = useGetCategoriesQuery();
+  const { data: cards, isError, isLoading } = useGetCardsQuery();
   
+  if (isLoading) return
+  if (isError) return
+  
+
   return (
     <section>
-      <h1>Home</h1>
+      <h1>homepage</h1>
+      <List cards={cards} />
     </section>
   );
 }
