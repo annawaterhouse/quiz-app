@@ -1,6 +1,6 @@
 # Quiz App
 
-A simple web application for study materials.
+A fullstack web application for study materials.
 
 ## Getting Started
 
