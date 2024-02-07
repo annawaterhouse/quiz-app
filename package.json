@@ -2,6 +2,7 @@
   "name": "interview-app",
   "private": true,
   "version": "0.0.0",
+  "type": "commonjs",
   "prisma": {
     "schema": "src/server/prisma/schema.prisma",
     "seed": "node src/server/prisma/seed.js"
