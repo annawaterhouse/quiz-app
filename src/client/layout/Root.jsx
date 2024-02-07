@@ -4,8 +4,10 @@ import Nav from "./Nav"
 function Root() {
   return (
     <>
-      <Nav />
-      <main>
+      <header className="border">
+        <Nav />
+      </header>
+      <main className="">
         <Outlet />
       </main>
     </>

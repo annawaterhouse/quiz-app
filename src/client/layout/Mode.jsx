@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Switch() {
+export default function Mode() {
   const [mode, setMode] = useState(false);
   return (
     <section>

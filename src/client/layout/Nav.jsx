@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useGetCategoriesQuery } from "./quizSlice";
 import { useDispatch } from "react-redux";
 
+//todo: switch to a server side rendered component
+
 function LinkCard({ name, id, handleClick }) {
 
     return(
@@ -25,8 +27,8 @@ export default function Nav() {
   };
 
   return (
-    <nav>
-      <h1>Nav</h1>
+    <nav className="">
+      <h1 className="font-mono">Nav</h1>
       {categories && (
         <ul>
           <li>
