@@ -43,16 +43,10 @@ router.get("/", async (req, res, next) => {
             return grouped;
           }, {});
           res.json({
-            status: 200,
-            message: 'Data fetched successfully',
             data: groupedByCategory
             });
         } catch (error) {
-            res.status(500).json({
-              status: 500,
-              message: 'An error occurred while fetching data',
-              error: error.message
-            });
+            next(error);
         }
     });
 
