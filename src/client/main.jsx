@@ -7,6 +7,7 @@ import Root from './layout/Root'
 import Category from './layout/Category'
 import Home from './layout/Home'
 import Form from './features/create/Form'
+import Saved from './features/saved/Saved'
 
 
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/:id", element: <Category /> },
+      { path: "/saved", element: <Saved /> },
       { path: "/create", element: <Form />}
     ],
   },

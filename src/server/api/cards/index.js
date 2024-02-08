@@ -15,7 +15,7 @@ router.get("/byCategory/:id", async (req, res, next) => {
     
     try {
         const catId = +req.params.id;
-        const categoryCards = await prisma.card.findMany({
+        const category = await prisma.card.findMany({
             where: { categoryId: catId },
             include: {
               category: {
@@ -25,6 +25,15 @@ router.get("/byCategory/:id", async (req, res, next) => {
               }, // Include category data in the result
             },
           });
+          // Create a new object where the keys are the category names
+          const categoryCards = category.reduce((grouped, card) => {
+            const key = card.category.name;
+            if (!grouped[key]) {
+              grouped[key] = [];
+            }
+            grouped[key].push(card);
+            return grouped;
+          }, {});
         res.json({ data: categoryCards });
     } catch (error) {
         next(error);
@@ -33,9 +42,9 @@ router.get("/byCategory/:id", async (req, res, next) => {
 //get all quiz cards
 router.get("/", async (req, res, next) => {
     try {
-        const cards = await prisma.card.findMany();
+        const cards = await prisma.card.findMany({include: {category: {select: {name: true}}}});
         const groupedByCategory = cards.reduce((grouped, card) => {
-            const key = card.categoryId;
+            const key = card.category.name;
             if (!grouped[key]) {
               grouped[key] = [];
             }
