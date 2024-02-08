@@ -1,8 +1,8 @@
 import Forum from "./Forum";
 import { useState } from "react";
 
-function Flashcard({ cards, categoryCards }) {
-const data = cards || categoryCards;
+function Flashcard({ cards, saved, categoryCards }) {
+const data = cards || categoryCards || saved;
 console.log(data, "flashcard data")
 const shuffledArr = Object.values(data).flat().sort(() => Math.random() - 0.5);
   
@@ -30,12 +30,12 @@ return (
   );
 }
 
-export default function Quiz({ cards, categoryCards }) {
+export default function Quiz({ cards, saved, categoryCards }) {
 
   return (
     <>
-      <Flashcard cards={cards} categoryCards={categoryCards} />
-      <Forum cards={cards} categoryCards={categoryCards} />
+      <Flashcard cards={cards} categoryCards={categoryCards} saved={saved} />
+      <Forum cards={cards} categoryCards={categoryCards} saved={saved} />
     </>
   );
 }

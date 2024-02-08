@@ -31,7 +31,7 @@ export default function Nav() {
             <Link to="/saved">Saved</Link>
           </li>
           <li>
-            <p className="text-xs">DECKS</p>
+            <p className="text-xs">STUDY DECKS</p>
           </li>
           {categories.map((cat) => (
             <LinkCard key={cat.id} id={cat.id} name={cat.name} />

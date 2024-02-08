@@ -1,6 +1,6 @@
 
-export default function List({ cards, categoryCards }) {
-  const data = cards || categoryCards;
+export default function List({ cards, categoryCards, saved}) {
+  const data = cards || categoryCards || saved;
   console.log(data)
     return (
       <>

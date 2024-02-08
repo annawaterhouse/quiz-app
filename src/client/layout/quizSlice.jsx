@@ -19,6 +19,10 @@ const quizApi = api.injectEndpoints({
       query: (id) => `/cards/byCategory/${id}`,
         transformResponse: (response) => response.data,
     }),
+    getSaved: builder.query({
+      query: () => "/cards/saved",
+        transformResponse: (response) => response.data,
+    }),
     createCard: builder.mutation({
       query: (card) => ({
         url: "/cards/create/card",
@@ -42,6 +46,7 @@ export const {
   useGetCardsQuery,
   useGetCategoriesQuery,
   useGetByCategoryQuery,
+  useGetSavedQuery,
   useGetQuizQuery,
 } = quizApi;
 

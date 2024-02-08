@@ -7,7 +7,7 @@ import Root from './layout/Root'
 import Category from './layout/Category'
 import Home from './layout/Home'
 import Form from './features/create/Form'
-import Saved from './features/saved/Saved'
+import Saved from './layout/Saved'
 
 
 const router = createBrowserRouter([
