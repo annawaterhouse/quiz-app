@@ -112,7 +112,7 @@ router.post("/create/category", async (req, res, next) => {
         name,
       },
     });
-    res.json({ data: newCategory });
+    res.json({ message: "Category created", data: newCategory});
   } catch (err) {
     next(err);
   }

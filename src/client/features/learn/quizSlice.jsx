@@ -48,5 +48,6 @@ export const {
   useGetByCategoryQuery,
   useGetSavedQuery,
   useGetQuizQuery,
+  useCreateCategoryMutation,
 } = quizApi;
 
