@@ -1,8 +1,7 @@
-import { useGetSavedQuery } from "./quizSlice";
+import { useGetSavedQuery } from "../features/learn/quizSlice";
 import List from "../features/learn/List";
 import Quiz from "../features/learn/Quiz";
 import { useSelector } from "react-redux";
-import Mode from "./Mode";
 
 export default function Saved() {
  //api call to get all cards
@@ -16,7 +15,6 @@ export default function Saved() {
   return (
     <section>
       <h1>Saved</h1>
-      <Mode />
       { mode ? (<Quiz saved={saved} />) : (<List saved={saved} />) }
     </section>
   );

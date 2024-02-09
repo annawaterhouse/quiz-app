@@ -1,5 +1,4 @@
 import Forum from "./Forum";
-import { useState } from "react";
 
 function Flashcard({ cards, saved, categoryCards }) {
 const data = cards || categoryCards || saved;
