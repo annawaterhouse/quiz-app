@@ -39,6 +39,13 @@ const quizApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Cards", "Categories"],
     }),
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `/cards/delete/category/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Cards", "Categories"],
+    }),
   }),
 });
 
@@ -49,5 +56,6 @@ export const {
   useGetSavedQuery,
   useGetQuizQuery,
   useCreateCategoryMutation,
+  useDeleteCategoryMutation,
 } = quizApi;
 

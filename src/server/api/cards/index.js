@@ -118,17 +118,17 @@ router.post("/create/category", async (req, res, next) => {
   }
 });
 
-/** deletes single card by id */
-router.delete("/card/delete/:id", async (req, res, next) => {
+/** deletes category id */
+router.delete("/delete/category/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;
     if (!id) res.json({ error: "Cannot find ID" });
-    const deleteCard = await prisma.card.delete({
+    const deleteCategory = await prisma.category.delete({
       where: {
         id,
       },
     });
-    res.json({ data: deleteCard });
+    res.json({ message: "Successfully deleted category", data: deleteCategory });
   } catch (err) {
     next(err);
   }
