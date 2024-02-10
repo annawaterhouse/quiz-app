@@ -8,7 +8,7 @@ import { useDeleteCategoryMutation } from "../../features/learn/quizSlice";
 import { MdAdd } from "react-icons/md";
 import { IoMdCheckmark } from "react-icons/io";
 import { TiDelete } from "react-icons/ti";
-
+import DeletePopup from "./DeletePopup";
 
 function LinkCard({ name, id }) {
   const navigate = useNavigate();
@@ -36,33 +36,32 @@ function LinkCard({ name, id }) {
     }
   };
 
-    //close delete confirmation pop-up if clicked outside
-    useEffect(() => {
-      const checkClickAway = (e) => {
-        if (message && ref.current && !ref.current.contains(e.target)) {
-          setMessage(false);
-        }
-      };
-      document.addEventListener("mousedown", checkClickAway);
-      document.addEventListener("touchstart", checkClickAway);
-      return () => {
-        document.removeEventListener("mousedown", checkClickAway);
-        document.removeEventListener("touchstart", checkClickAway);
-      };
-    }),
-      [message];
+  //close delete confirmation pop-up if clicked outside
+  useEffect(() => {
+    const checkClickAway = (e) => {
+      if (message && ref.current && !ref.current.contains(e.target)) {
+        setMessage(false);
+      }
+    };
+    document.addEventListener("mousedown", checkClickAway);
+    document.addEventListener("touchstart", checkClickAway);
+    return () => {
+      document.removeEventListener("mousedown", checkClickAway);
+      document.removeEventListener("touchstart", checkClickAway);
+    };
+  }),
+    [message];
 
   return (
     <li key={id} ref={ref} className="flex justify-between items-center group">
       <Link to={`/${id}`}>{name}</Link>
-      <button className="opacity-0 group-hover:opacity-100" onClick={onConfirm}><TiDelete /></button>
-      {message && 
-      <div className={message ? "absolute bottom-4 left-0 bg-white z-10" : "hidden"}>
-      <section className="bg-blue-100 p-8 w-full">
-        <button onClick={()=>setMessage(false)}>x</button>
-        <p className="text-xs">Are you sure you'd like to delete {name}?</p>
-        <button onClick={()=>onDelete(id)}>yes</button>
-      </section></div>}
+      <button
+        className="transition ease-in-out duration-200 opacity-0 group-hover:opacity-100"
+        onClick={onConfirm}
+      >
+        <TiDelete />
+      </button>
+      {message && <DeletePopup message={message} setMessage={setMessage} name={name} onDelete={onDelete} id={id} />}
     </li>
   );
 }
@@ -90,61 +89,62 @@ export default function Nav() {
     //dont make api call if input is empty
     const val = name.trim();
     if (val === "") return setActive(!active);
-  
+
     try {
       const response = await createCategory({ name: val }).unwrap();
       if (response.message) {
         setActive(!active);
       } else {
         setError(true);
-      } 
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
-  
-  
-
   return (
     <>
-
-    <nav className="relative hidden md:block md:p-4 bg-gray-100 text-gray-800">
-      <Mode />
-      {categories && (
-        <ul className="grid gap-4 tracking-wide font-bold text-md">
-          <li className="">
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/saved">Saved</Link>
-          </li>
-          <li>
-            <p className="text-xs font-medium leading-loose">STUDY DECKS</p>
-          </li>
-          {categories.map((cat) => (
-            <LinkCard key={cat.id} id={cat.id} name={cat.name} />
-          ))}
-          <li>
-          {!active ? (<button onClick={onActivate}><MdAdd /></button>) : (
-          <form onSubmit={handleCreate}>
-            <input 
-              type="text"
-              placeholder="Add New Deck"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="bg-transparent text-xs font-light"
-            />
-            <button type="submit" disabled={!active} className=""><IoMdCheckmark /></button>
-          </form>
-          )}
-          </li>
-        </ul>
-      )}
-    </nav>
+      <nav className="relative hidden md:block md:p-4 bg-gray-100 text-gray-800">
+        <Mode />
+        {categories && (
+          <ul className="grid gap-4 tracking-wide font-bold text-md">
+            <li className="">
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/saved">Saved</Link>
+            </li>
+            <li>
+              <p className="text-xs font-medium leading-loose">STUDY DECKS</p>
+            </li>
+            {categories.map((cat) => (
+              <LinkCard key={cat.id} id={cat.id} name={cat.name} />
+            ))}
+            <li>
+              {!active ? (
+                <button onClick={onActivate}>
+                  <MdAdd />
+                </button>
+              ) : (
+                <form onSubmit={handleCreate}>
+                  <input
+                    type="text"
+                    placeholder="Add New Deck"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-transparent text-xs font-light"
+                  />
+                  <button type="submit" disabled={!active} className="">
+                    <IoMdCheckmark />
+                  </button>
+                </form>
+              )}
+            </li>
+          </ul>
+        )}
+      </nav>
     </>
-
   );
 }

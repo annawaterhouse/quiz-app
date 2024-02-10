@@ -88,16 +88,32 @@ router.get("/saved", async (req, res, next) => {
 /* create a new card */
 router.post("/create/card", async (req, res, next) => {
   try {
-    const { question, answer, isSaved, categoryId } = req.body;
+    const { categoryId, question, answer } = req.body;
     const newCard = await prisma.card.create({
       data: {
+        categoryId: +categoryId,
         question,
         answer,
-        isSaved,
-        categoryId,
+        isSaved: false,
+        
       },
     });
-    res.json({ data: newCard });
+    res.json({ message: "new card successfully created", data: newCard });
+  } catch (err) {
+    next(err);
+  }
+});
+/** deletes card by id */
+router.delete("/delete/card/:id", async (req, res, next) => {
+  try {
+    const id = +req.params.id;
+    if (!id) res.json({ error: "Cannot find ID" });
+    const deletedCard = await prisma.card.delete({
+      where: {
+        id,
+      },
+    });
+    res.json({ message: "Successfully deleted card", data: deletedCard });
   } catch (err) {
     next(err);
   }
@@ -134,7 +150,7 @@ router.delete("/delete/category/:id", async (req, res, next) => {
   }
 });
 
-/** Updates single card by id */
+/** Updates card by id */
 router.put("/update/:id", async (req, res, next) => {
   try {
     const id = +req.params.id;

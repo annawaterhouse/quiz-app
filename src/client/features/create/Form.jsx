@@ -8,16 +8,22 @@ export default function Form() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const newCard = {
+      categoryId: formData.get("categoryId"),
+      question: formData.get("question"),
+      answer: formData.get("answer"),
+    }
 
     try {
-      const response = await createCard(formData).unwrap();
-      if (response.message) {
-        setMessage(() => response.message);
-      }
-      if (response.data) {
-        e.target.reset();
-        navigate("/");
-      }
+      const response = await createCard(newCard).unwrap();
+      console.log(response, "response from create card")
+      // if (response.message) {
+      //   setMessage(() => response.message);
+      // }
+      // if (response.data) {
+      //   e.target.reset();
+      //   navigate("/");
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -26,7 +32,8 @@ export default function Form() {
   return (
     <form onSubmit={onSubmit} className="">
       <legend>Add a new quiz card</legend>
-      <select name="category" type="text" required>
+      <select name="categoryId" type="text" required>
+        <option value="default">Category</option>
         {categories &&
           categories.map((category) => (
             <option key={category.id} value={category.id}>
@@ -35,7 +42,7 @@ export default function Form() {
           ))}
       </select>
       <input name="question" type="text" placeholder="Question" required />
-      <input name="answer" type="text" placeholder="Description" required />
+      <input name="answer" type="text" placeholder="Answer" required />
       <button type="submit">Add Card</button>
     </form>
   );

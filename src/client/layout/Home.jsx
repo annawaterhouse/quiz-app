@@ -2,6 +2,7 @@ import { useGetCardsQuery } from "../features/learn/quizSlice";
 import List from "../features/learn/List";
 import Quiz from "../features/learn/Quiz";
 import { useSelector } from "react-redux";
+import Form from "../features/create/Form";
 
 export default function Home() {
  //api call to get all cards
@@ -14,6 +15,7 @@ export default function Home() {
 
   return (
     <section>
+    <Form />
       { mode ? (<Quiz cards={cards} />) : (<List cards={cards} />) }
     </section>
   );

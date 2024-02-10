@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import api from "./api";
-import modeReducer from "../layout/navigation/modeSlice";
+import modeReducer from "../layout/nav/modeSlice";
 
 
 const store = configureStore({
