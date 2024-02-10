@@ -29,7 +29,14 @@ const quizApi = api.injectEndpoints({
         method: "POST",
         body: card,
       }),
-      invalidatesTags: ["Cards", "Categories"],
+      invalidatesTags: ["Cards"],
+    }),
+    deleteCard: builder.mutation({
+      query: (id) => ({
+        url: `/cards/delete/card/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Cards"],
     }),
     createCategory: builder.mutation({
       query: (name) => ({
@@ -37,14 +44,14 @@ const quizApi = api.injectEndpoints({
         method: "POST",
         body: name,
       }),
-      invalidatesTags: ["Cards", "Categories"],
+      invalidatesTags: ["Categories"],
     }),
     deleteCategory: builder.mutation({
       query: (id) => ({
         url: `/cards/delete/category/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Cards", "Categories"],
+      invalidatesTags: ["Categories"],
     }),
   }),
 });
@@ -55,6 +62,8 @@ export const {
   useGetByCategoryQuery,
   useGetSavedQuery,
   useGetQuizQuery,
+  useCreateCardMutation,
+  useDeleteCardMutation,
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
 } = quizApi;
