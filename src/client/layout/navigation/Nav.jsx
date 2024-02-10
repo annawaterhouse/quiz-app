@@ -7,16 +7,18 @@ import { MdAdd } from "react-icons/md";
 import { IoMdCheckmark } from "react-icons/io";
 import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 function LinkCard({ name, id }) {
+  const navigate = useNavigate();
   //todo: add listener for click outside of confirmation message
   const [message, setMessage] = useState(false);
   const [deleteCategory] = useDeleteCategoryMutation();
-  
+  //category delete confirmation
   const onConfirm = () => {
     setMessage(!message);
   };
-  
+  //delete categry by id api req
   const onDelete = async (id) => {
     console.log(id)
     try {
@@ -28,6 +30,7 @@ function LinkCard({ name, id }) {
       console.log(error);
     } finally {
       setMessage(false);
+      navigate("/");
     }
   }
 

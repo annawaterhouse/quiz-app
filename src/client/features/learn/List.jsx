@@ -8,7 +8,7 @@ export default function List({ cards, categoryCards, saved }) {
           <section key={dataId} className="relative py-4 rounded-lg">
             <section className="flex justify-between items-center">
               <h2 className="text-lg font-bold tracking-wide mb-2">{dataId}</h2>
-              <button>+ Add Card</button>
+              <button>+ New Card</button>
             </section>
             <ul className="grid gap-4">
               {data[dataId].map((card) => (
