@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMode } from "./modeSlice";
+
 export default function Mode() {
   //redux for list to quiz mode state management
   const mode = useSelector((state) => state.mode.mode);

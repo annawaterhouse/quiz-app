@@ -1,26 +1,28 @@
 import { Link } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../features/learn/quizSlice";
 import { useCreateCategoryMutation } from "../../features/learn/quizSlice";
+import { useNavigate } from "react-router-dom";
 import Mode from "./Mode";
+import { useEffect, useRef, useState } from "react";
 import { useDeleteCategoryMutation } from "../../features/learn/quizSlice";
 import { MdAdd } from "react-icons/md";
 import { IoMdCheckmark } from "react-icons/io";
-import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
-import { useNavigate } from "react-router-dom";
+
 
 function LinkCard({ name, id }) {
   const navigate = useNavigate();
-  //todo: add listener for click outside of confirmation message
-  const [message, setMessage] = useState(false);
   const [deleteCategory] = useDeleteCategoryMutation();
+  //handle delete confirmation pop-up open state
+  const [message, setMessage] = useState(false);
+  const ref = useRef(null);
   //category delete confirmation
   const onConfirm = () => {
     setMessage(!message);
   };
+
   //delete categry by id api req
   const onDelete = async (id) => {
-    console.log(id)
     try {
       const response = await deleteCategory(id).unwrap();
       if (response.message) {
@@ -32,10 +34,26 @@ function LinkCard({ name, id }) {
       setMessage(false);
       navigate("/");
     }
-  }
+  };
+
+    //close delete confirmation pop-up if clicked outside
+    useEffect(() => {
+      const checkClickAway = (e) => {
+        if (message && ref.current && !ref.current.contains(e.target)) {
+          setMessage(false);
+        }
+      };
+      document.addEventListener("mousedown", checkClickAway);
+      document.addEventListener("touchstart", checkClickAway);
+      return () => {
+        document.removeEventListener("mousedown", checkClickAway);
+        document.removeEventListener("touchstart", checkClickAway);
+      };
+    }),
+      [message];
 
   return (
-    <li key={id} className="flex justify-between items-center group">
+    <li key={id} ref={ref} className="flex justify-between items-center group">
       <Link to={`/${id}`}>{name}</Link>
       <button className="opacity-0 group-hover:opacity-100" onClick={onConfirm}><TiDelete /></button>
       {message && 
