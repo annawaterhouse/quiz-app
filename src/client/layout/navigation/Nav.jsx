@@ -9,11 +9,14 @@ import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 
 function LinkCard({ name, id }) {
+  //todo: add listener for click outside of confirmation message
   const [message, setMessage] = useState(false);
   const [deleteCategory] = useDeleteCategoryMutation();
+  
   const onConfirm = () => {
     setMessage(!message);
   };
+  
   const onDelete = async (id) => {
     console.log(id)
     try {
@@ -35,9 +38,9 @@ function LinkCard({ name, id }) {
       {message && 
       <div className={message ? "absolute bottom-4 left-0 bg-white z-10" : "hidden"}>
       <section className="bg-blue-100 p-8 w-full">
+        <button onClick={()=>setMessage(false)}>x</button>
         <p className="text-xs">Are you sure you'd like to delete {name}?</p>
         <button onClick={()=>onDelete(id)}>yes</button>
-        <button>no</button>
       </section></div>}
     </li>
   );
@@ -46,11 +49,6 @@ function LinkCard({ name, id }) {
 export default function Nav() {
   const { data: categories, isError, isLoading } = useGetCategoriesQuery();
   const [createCategory] = useCreateCategoryMutation();
-
-
-
-  
-  
 
   const [active, setActive] = useState(false);
   const [name, setName] = useState("");
@@ -92,7 +90,7 @@ export default function Nav() {
   return (
     <>
 
-    <nav className="relative hidden md:block  md:p-4 bg-gray-100 text-gray-800">
+    <nav className="relative hidden md:block md:p-4 bg-gray-100 text-gray-800">
       <Mode />
       {categories && (
         <ul className="grid gap-4 tracking-wide font-bold text-md">
