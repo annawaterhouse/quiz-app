@@ -1,7 +1,4 @@
-import Forum from "./Forum";
 import Carousel from "./Carousel";
-import { useState } from "react";
-
 
 export default function Quiz({ cards, saved, categoryCards }) {
 

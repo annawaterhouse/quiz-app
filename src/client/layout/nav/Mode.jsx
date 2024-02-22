@@ -12,7 +12,7 @@ export default function Mode() {
   return (
     <section>
       <label htmlFor="switch" className="flex items-center md:gap-x-2">
-        <span className="hidden md:block text-sm font-medium md:text-lg text-black">Learn</span>
+        <span className="text-sm font-medium md:text-lg text-black">Learn</span>
         <input
           type="checkbox"
           className="sr-only"
@@ -31,7 +31,7 @@ export default function Mode() {
             }`}
           ></span>
         </span>
-        <span className="hidden md:block font-medium md:text-lg text-black">Quiz</span>
+        <span className="text-sm font-medium md:text-lg text-black">Quiz</span>
       </label>
     </section>
   );

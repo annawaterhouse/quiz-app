@@ -1,5 +1,5 @@
-import { useCreateCardMutation } from "../learn/quizSlice";
-import { useGetCategoriesQuery } from "../learn/quizSlice";
+import { useCreateCardMutation } from "../../layout/quizSlice";
+import { useGetCategoriesQuery } from "../../layout/quizSlice";
 
 export default function Form() {
   const [createCard] = useCreateCardMutation();

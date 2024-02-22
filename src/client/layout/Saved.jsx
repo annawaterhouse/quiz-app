@@ -1,6 +1,6 @@
-import { useGetSavedQuery } from "../features/learn/quizSlice";
-import List from "../features/learn/List";
-import Quiz from "../features/learn/Quiz";
+import { useGetSavedQuery } from "./quizSlice";
+import Learn from "../components/views/Learn";
+import Quiz from "../components/views/Quiz";
 import { useSelector } from "react-redux";
 
 export default function Saved() {
@@ -15,7 +15,7 @@ export default function Saved() {
   return (
     <section>
       <h1>Saved</h1>
-      { mode ? (<Quiz saved={saved} />) : (<List saved={saved} />) }
+      { mode ? (<Quiz saved={saved} />) : (<Learn saved={saved} />) }
     </section>
   );
 }

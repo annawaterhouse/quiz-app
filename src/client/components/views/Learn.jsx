@@ -1,4 +1,4 @@
-export default function List({ cards, categoryCards, saved }) {
+export default function Learn({ cards, categoryCards, saved }) {
   const data = cards || categoryCards || saved;
   console.log(data);
   return (

@@ -6,7 +6,7 @@ import store from './store'
 import Root from './layout/Root'
 import Category from './layout/Category'
 import Home from './layout/Home'
-import Form from './features/create/Form'
+import Form from './components/common/Form'
 import Saved from './layout/Saved'
 
 

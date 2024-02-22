@@ -1,6 +1,6 @@
-import List from "../features/learn/List";
-import Quiz from "../features/learn/Quiz";
-import { useGetByCategoryQuery } from "../features/learn/quizSlice";
+import Learn from "../components/views/Learn";
+import Quiz from "../components/views/Quiz";
+import { useGetByCategoryQuery } from "./quizSlice";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -16,7 +16,7 @@ export default function Category() {
 
   return (
     <section>
-      { !mode ? (<List categoryCards={categoryCards} />) : (<Quiz categoryCards={categoryCards} />) }
+      { !mode ? (<Learn categoryCards={categoryCards} />) : (<Quiz categoryCards={categoryCards} />) }
     </section>
   );
 }
