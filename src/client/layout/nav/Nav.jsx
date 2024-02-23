@@ -9,8 +9,8 @@ export default function Nav() {
       <nav className="p-6 md:p-8 flex justify-between items-center bg-gray-300 text-gray-800">
         <Mode />
         <menu className="flex gap-8">
-          <Link to="/"><MdOutlineCategory style={{"font-size": "26px"}} /></Link>
-          <button onClick={handleForm}><IoMdAdd style={{"font-size": "26px"}} /></button>
+          <Link to="/"><MdOutlineCategory /></Link>
+          <button><IoMdAdd /></button>
         </menu>
       </nav>
   );
