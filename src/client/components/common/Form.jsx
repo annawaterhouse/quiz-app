@@ -28,7 +28,7 @@ export default function Form() {
   console.log(data, "data from form")
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white z-50 absolute top-1/2 left-1/2">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white z-50 absolute ">
       <legend>Add a new quiz card</legend>
       <section className="flex flex-col">
         <FormControl variant="standard" error={Boolean(errors.category)}>
