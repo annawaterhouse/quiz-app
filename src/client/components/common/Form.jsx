@@ -1,22 +1,23 @@
 import { useCreateCardMutation } from "../../layout/quizSlice";
 import { useGetCategoriesQuery } from "../../layout/quizSlice";
+import { useForm } from "react-hook-form"
+import { useState } from "react";
+
 
 export default function Form() {
-  const [createCard] = useCreateCardMutation();
-  const { data: categories } = useGetCategoriesQuery();
+  // const [createCard] = useCreateCardMutation();
+  // const { data: categories } = useGetCategoriesQuery();
+  const { register,  formState: { errors }, handleSubmit } = useForm();
+  const [ data, setData ] = useState({ question:});
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const newCard = {
-      categoryId: formData.get("categoryId"),
-      question: formData.get("question"),
-      answer: formData.get("answer"),
+
+  const onSubmit =  (data) => {
+    setData(data);
+
     }
-
-    try {
-      const response = await createCard(newCard).unwrap();
-      console.log(response, "response from create card")
+    // try {
+    //   const response = await createCard(newCard).unwrap();
+    //   console.log(response, "response from create card")
       // if (response.message) {
       //   setMessage(() => response.message);
       // }
@@ -24,26 +25,31 @@ export default function Form() {
       //   e.target.reset();
       //   navigate("/");
       // }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    console.log(data, "data from form")
 
   return (
-    <form onSubmit={onSubmit} className="">
+    <form onSubmit={handleSubmit(onSubmit)} className="z-50 absolute top-1/2 left-1/2">
       <legend>Add a new quiz card</legend>
-      <select name="categoryId" type="text" required>
-        <option value="default">Category</option>
-        {categories &&
-          categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-      </select>
-      <input name="question" type="text" placeholder="Question" required />
-      <input name="answer" type="text" placeholder="Answer" required />
-      <button type="submit">Add Card</button>
+        <section>
+        <label>Category</label>
+          <label>Question</label>
+          <input
+        {...register("question", { required: true }
+        )}
+        aria-invalid={errors.question ? "true" : "false"}
+      />
+      {errors.question?.type === "required" && (
+        <p role="alert">Question is required</p>
+      )}
+      <label>Answer</label>
+      <input
+        {...register("answer", { required: false})}
+      />
+        </section>
+      <input type="submit" />
     </form>
   );
 }
