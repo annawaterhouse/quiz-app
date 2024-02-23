@@ -88,14 +88,12 @@ router.get("/saved", async (req, res, next) => {
 /* create a new card */
 router.post("/create/card", async (req, res, next) => {
   try {
-    const { categoryId, question, answer } = req.body;
+    const { category, question, answer } = req.body;
     const newCard = await prisma.card.create({
       data: {
-        categoryId: +categoryId,
+        categoryId: +category,
         question,
         answer,
-        isSaved: false,
-        
       },
     });
     res.json({ message: "new card successfully created", data: newCard });
