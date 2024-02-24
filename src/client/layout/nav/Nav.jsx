@@ -4,6 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import Mode from "./Mode";
 import { useRef, useEffect, useState } from 'react';
 import Form from "../../components/common/Form";
+import Button from "../../components/common/Button"
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -30,11 +31,12 @@ const formRef = useRef();
   }, [open, handleClose]);
 
   return (
-      <nav className="p-6 md:p-8 flex justify-between items-center bg-gray-300 text-gray-800">
+      <nav className="p-6 md:p-8 flex justify-between items-center bg-gray-200 text-gray-800">
         <Mode />
         <menu className="flex gap-8">
           <Link to="/"><MdOutlineCategory /></Link>
           <button onClick={handleOpen}><IoMdAdd /></button>
+
         </menu>
        {open && <Form ref={formRef} />}
       </nav>

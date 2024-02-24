@@ -8,6 +8,7 @@ import Category from './layout/Category'
 import Home from './layout/Home'
 import Form from './components/common/Form'
 import Saved from './layout/Saved'
+import Decks from './layout/Decks'
 
 
 const router = createBrowserRouter([
