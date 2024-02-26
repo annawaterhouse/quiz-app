@@ -14,7 +14,7 @@ export default function Learn({ cards, categoryCards, saved }) {
               {data[dataId].map((card) => (
                 <li
                   key={card.id}
-                  className="grid grid-cols-12 rounded-md shadow-md  bg-gray-100 px-8 py-4"
+                  className="grid grid-cols-12 rounded-md shadow-md  bg-white px-8 py-4"
                 >
                   <section className="col-span-11">
                     <h3 className="text-lg font-semibold mb-1 mt-2">
