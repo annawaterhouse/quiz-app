@@ -21,13 +21,4 @@ model Card {
     isSaved    Boolean  @default(false)
     category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     categoryId Int
-    posts      Post[]
-}
-
-model Post {
-    id         Int      @id @default(autoincrement())
-    cardId Int
-    createdAt  DateTime @default(now())
-    content    String
-    card       Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
 }

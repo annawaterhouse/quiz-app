@@ -58,15 +58,8 @@ const dbRt = [
         category: "React",
         isSaved: false
     }
-]
-const posts = [
-  {
-    content: "i've had a lot of linked lists on interviews",
-  },
-  {
-    content: "me too",
-  },
 ];
+
 const seed = async () => {
   await prisma.category.upsert({
     where: { name: "Data Structures" },
@@ -78,11 +71,6 @@ const seed = async () => {
           question: `${item.question + index}`,
           answer: item.answer,
           isSaved: item.isSaved,
-          posts: {
-            create: posts.map((post) => ({
-              content: post.content,
-            })),
-          },
         })),
       },
     },
@@ -97,11 +85,6 @@ const seed = async () => {
           question: `${item.question + index}`,
           answer: item.answer,
           isSaved: item.isSaved,
-          posts: {
-            create: posts.map((post) => ({
-              content: post.content,
-            })),
-          },
         })),
       },
     },
@@ -116,11 +99,6 @@ const seed = async () => {
           question: `${item.question + index}`,
           answer: item.answer,
           isSaved: item.isSaved,
-          posts: {
-            create: posts.map((post) => ({
-              content: post.content,
-            })),
-          },
         })),
       },
     },
