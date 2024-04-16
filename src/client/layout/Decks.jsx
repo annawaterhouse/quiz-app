@@ -4,10 +4,8 @@ import { useCreateCategoryMutation } from "./quizSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useDeleteCategoryMutation } from "./quizSlice";
-import { MdAdd } from "react-icons/md";
-import { IoMdCheckmark } from "react-icons/io";
-import { TiDelete } from "react-icons/ti";
 import DeletePopup from "./nav/DeletePopup";
+import "./decks.scss";
 
 function LinkCard({ name, id }) {
   const navigate = useNavigate();
@@ -52,15 +50,22 @@ function LinkCard({ name, id }) {
     [message];
 
   return (
-    <li key={id} ref={ref} className="flex justify-between items-center group">
+    <li key={id} ref={ref} className="category-li">
+      <button>
       <Link to={`/${id}`}>{name}</Link>
-      <button
-        className="transition ease-in-out duration-200 opacity-0 group-hover:opacity-100"
-        onClick={onConfirm}
-      >
-        <TiDelete />
       </button>
-      {message && <DeletePopup message={message} setMessage={setMessage} name={name} onDelete={onDelete} id={id} />}
+      <button className="delete-btn" onClick={onConfirm}>
+        x
+      </button>
+      {message && (
+        <DeletePopup
+          message={message}
+          setMessage={setMessage}
+          name={name}
+          onDelete={onDelete}
+          id={id}
+        />
+      )}
     </li>
   );
 }
@@ -104,23 +109,18 @@ export default function Decks() {
   };
 
   return (
- <>
+    <section className="decks grid container">
+
+      <h1>Study Decks</h1>
+
       {categories && (
-        <ul className="mt-6 p-6 bg-white grid text-xl gap-8 tracking-wide font-bold text-md">
-          <li>
-            <p className="text-xs font-medium leading-loose">STUDY DECKS</p>
-          </li>
-          <li>
-            <Link to="/saved">Saved</Link>
-          </li>
+        <ul className="grid">
           {categories.map((cat) => (
             <LinkCard key={cat.id} id={cat.id} name={cat.name} />
           ))}
           <li>
             {!active ? (
-              <button onClick={onActivate}>
-                <MdAdd />
-              </button>
+              <button className="newcat-btn" onClick={onActivate}>+</button>
             ) : (
               <form onSubmit={handleCreate}>
                 <input
@@ -128,17 +128,16 @@ export default function Decks() {
                   placeholder="Add New Deck"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-transparent text-xs font-light"
+                  className=""
                 />
                 <button type="submit" disabled={!active} className="">
-                  <IoMdCheckmark />
+                  Check
                 </button>
               </form>
             )}
           </li>
         </ul>
       )}
-    </>
+    </section>
   );
 }
-

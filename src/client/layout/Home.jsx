@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <section>
-      <Decks />
+    <Decks />
       { mode ? (<Quiz cards={cards} />) : (<Learn cards={cards} />) }
     </section>
   );

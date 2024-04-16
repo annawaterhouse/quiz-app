@@ -1,0 +1,32 @@
+section.decks h1 {
+    padding: 1em;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+.newcat-btn {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.category-li {
+    position: relative;
+}
+.delete-btn {
+    position: absolute;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: 0;
+
+  li {
+    padding: 1em;
+    list-style: none;
+    font-size: 1.3rem;
+    background: purple;
+  }
+}

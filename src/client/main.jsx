@@ -5,10 +5,8 @@ import { Provider } from 'react-redux'
 import store from './store'
 import Root from './layout/Root'
 import Category from './layout/Category'
-import Home from './layout/Home'
-import Form from './components/common/Form'
-import Saved from './layout/Saved'
 import Decks from './layout/Decks'
+import './styles.scss'
 
 
 const router = createBrowserRouter([
@@ -16,10 +14,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Home /> },
+      { path: "/", element: <Decks /> },
       { path: "/:id", element: <Category /> },
-      { path: "/saved", element: <Saved /> },
-      { path: "/create", element: <Form />}
     ],
   },
 ]);
