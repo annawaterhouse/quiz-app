@@ -32,7 +32,8 @@ export default function Nav() {
         <h1 className="logo">Study App</h1>
         <menu className="flex">
           <Link to="/">Categories</Link>
-          <button onClick={handleOpen}>Add New</button>
+          <button>darkmode</button>
+          <button onClick={handleOpen}>+</button>
         </menu>
         {open && <Form ref={formRef} />}
     </nav>

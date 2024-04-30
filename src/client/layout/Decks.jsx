@@ -17,7 +17,10 @@ function LinkCard({ name, id }) {
   const onConfirm = () => {
     setMessage(!message);
   };
-
+  //navigate to category view
+  const handleNav = (id) => {
+    navigate(`/${id}`);
+  };
   //delete categry by id api req
   const onDelete = async (id) => {
     try {
@@ -49,12 +52,14 @@ function LinkCard({ name, id }) {
   }),
     [message];
 
+  /*html to add*/
+
   return (
-    <li key={id} ref={ref} className="category-li">
-      <button>
-      <Link to={`/${id}`}>{name}</Link>
-      </button>
-      <button className="delete-btn" onClick={onConfirm}>
+    <li key={id} ref={ref} className="card">
+      <h2 className="text-400" onClick={() => handleNav(id)}>
+        {name}
+      </h2>
+      <button className="text-200 delete" onClick={onConfirm}>
         x
       </button>
       {message && (
@@ -110,17 +115,18 @@ export default function Decks() {
 
   return (
     <section className="decks grid container">
-
       <h1>Study Decks</h1>
-
       {categories && (
-        <ul className="grid">
+        <ul className="flow">
+          <li>Saved</li>
           {categories.map((cat) => (
             <LinkCard key={cat.id} id={cat.id} name={cat.name} />
           ))}
-          <li>
+          <li className="card">
             {!active ? (
-              <button className="newcat-btn" onClick={onActivate}>+</button>
+              <h2 className="text-400" onClick={onActivate}>
+                +
+              </h2>
             ) : (
               <form onSubmit={handleCreate}>
                 <input
@@ -128,7 +134,7 @@ export default function Decks() {
                   placeholder="Add New Deck"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className=""
+                  className="cat-input"
                 />
                 <button type="submit" disabled={!active} className="">
                   Check

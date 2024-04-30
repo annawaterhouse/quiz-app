@@ -1,91 +1,58 @@
 import { useCreateCardMutation } from "../../layout/quizSlice";
 import { useGetCategoriesQuery } from "../../layout/quizSlice";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from '@mui/material/InputLabel';
-import { MenuItem } from "@mui/material";
-import Select from '@mui/material/Select';
-import TextField from "@mui/material/TextField";
-import FormHelperText from "@mui/material/FormHelperText";
+import "./form.scss";
 
-export default function Form() {
+export default function Form({ setOpen }) {
   const [createCard] = useCreateCardMutation();
   const { data: categories } = useGetCategoriesQuery();
-  const { formState: { errors }, handleSubmit, control } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [data, setData] = useState({});
 
   const onSubmit = async (data) => {
+    if (!data) return;
     setData(data);
     try {
       const response = await createCard(data).unwrap();
-      console.log(response, "response from create card")
-
+      setOpen(false);
+      console.log(response, "response from create card");
     } catch (err) {
       console.log(err);
     }
-  }
-  console.log(data, "data from form")
+  };
+  console.log(data, "data from form");
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white z-50 absolute ">
-      <legend>Add a new quiz card</legend>
-      <section className="flex flex-col">
-        <FormControl variant="standard" error={Boolean(errors.category)}>
-          <InputLabel htmlFor="category-select">Category</InputLabel>
-          <Controller
-            name="category"
-            control={control}
-            defaultValue=""
-            rules={{ required: 'Category is required' }}
-            render={({ field }) => (
-              <Select
-                {...field}
-                labelId='category-select'
-              >
-                <MenuItem value=''>Select...</MenuItem>
-                {categories?.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>
-                ))}
-              </Select>
-            )}
-          />
-          <FormHelperText>{errors.category?.message}</FormHelperText>
-        </FormControl>
-        <InputLabel variant="standard" htmlFor="category-select">
-          Question
-        </InputLabel>
-        <Controller
-          name="question"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Question"
-              variant="standard"
-              error={Boolean(errors.question)}
-              helperText={errors.question ? 'Question is required' : null}
-            />)}
+    <form className="form container" onSubmit={handleSubmit(onSubmit)}>
+      <h2>Create Card</h2>
+      <div className="grid">
+        <select {...register("category", { required: true })}>
+          <option value="">Category</option>
+          {categories &&
+            categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+        </select>
+        {errors.category && <span>Category is required</span>}
+        <input
+          {...register("question", { required: true })}
+          placeholder="Question"
         />
-        <InputLabel variant="standard" htmlFor="category-select">
-          Answer
-        </InputLabel>
-        <Controller
-          name="answer"
-          control={control}
-          defaultValue=""
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Answer"
-              variant="standard"
-            />)}
+        {errors.question && <span>This field is required</span>}
+        <input
+          {...register("answer", { required: true })}
+          placeholder="Answer"
         />
-      </section>
-      <input type="submit" />
+        {errors.answer && <span>This field is required</span>}
+        <input type="submit" />
+      </div>
     </form>
   );
 }

@@ -18,6 +18,7 @@ const quizApi = api.injectEndpoints({
     getByCategory: builder.query({
       query: (id) => `/cards/byCategory/${id}`,
         transformResponse: (response) => response.data,
+        invalidatesTags: ["Cards"],
     }),
     getSaved: builder.query({
       query: () => "/cards/saved",
