@@ -52,7 +52,7 @@ function LinkCard({ name, id }) {
   }),
     [message];
 
-  /*html to add*/
+  /*use edit page to delete category and add*/
 
   return (
     <li key={id} ref={ref} className="card">
@@ -118,7 +118,7 @@ export default function Decks() {
       <h1>Study Decks</h1>
       {categories && (
         <ul className="flow">
-          <li>Saved</li>
+          <li className="card">Saved</li>
           {categories.map((cat) => (
             <LinkCard key={cat.id} id={cat.id} name={cat.name} />
           ))}
