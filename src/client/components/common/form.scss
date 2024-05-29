@@ -1,0 +1,14 @@
+.form {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.708);
+}
+.form > section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

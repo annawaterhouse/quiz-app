@@ -1,32 +1,80 @@
-section.decks h1 {
-    padding: 1em;
-    font-size: 2rem;
-    text-align: center;
-    text-transform: uppercase;
-}
-.newcat-btn {
-  background: white;
-  color: black;
-  border: 1px solid black;
-}
-
-.category-li {
-    position: relative;
-}
-.delete-btn {
-    position: absolute;
-}
-
+/*universal list styling */
 ul {
   margin: 0;
   padding: 0;
   text-indent: 0;
   list-style-type: 0;
+  background: none;
 
   li {
-    padding: 1em;
     list-style: none;
-    font-size: 1.3rem;
-    background: purple;
+    background: lightgrey;
+    border: none;
+    outline: none;
   }
 }
+
+button {
+  background: none;
+  border: none;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 1em;
+}
+
+
+
+////specific to decks
+section.decks {
+  h1 {
+    padding: 1em;
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  li h2 {
+    padding: 1em;
+  }
+
+  li:is(:last-child) {
+    background: none;
+    border: 2px solid var(--accent);
+  }
+  li:is(:last-child) .cat-btn {
+    display: flex;
+    justify-content: center;
+    background: none;
+  }
+  .newcat-btn {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+  .delete {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+  .delete:hover {
+    scale: 1.25;
+  }
+  .cat-input {
+    background: var(--accent);
+  }
+}
+
+// button.delete {
+//     position: absolute;
+//     z-index: 3;
+//     border: none;
+//     background: none;
+//     top: 0;
+//     right: 0;
+//     background: white;
+// }
+// button.delete:hover {
+//     scale: 2;
+// }
