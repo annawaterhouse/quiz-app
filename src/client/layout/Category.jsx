@@ -1,11 +1,11 @@
-import Learn from "../components/views/Learn";
-import Quiz from "../components/views/Quiz";
+import Learn from "../universal/views/Learn";
+import Quiz from "../universal/views/Quiz";
 import { useGetByCategoryQuery } from "./quizSlice";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState, useRef } from "react";
-import Form from "../components/common/Form";
+import Form from "../universal/Form";
 
 export default function Category() {
 

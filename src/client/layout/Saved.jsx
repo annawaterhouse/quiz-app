@@ -1,6 +1,6 @@
 import { useGetSavedQuery } from "./quizSlice";
-import Learn from "../components/views/Learn";
-import Quiz from "../components/views/Quiz";
+import Learn from "../universal/views/Learn";
+import Quiz from "../universal/views/Quiz";
 import { useSelector } from "react-redux";
 
 export default function Saved() {

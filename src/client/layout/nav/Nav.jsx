@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import Form from "../../components/common/Form";
+import Form from "../../universal/Form";
+import ButtonDefault from "../../universal/ButtonDefault";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function Nav() {
         <h1 className="logo">Study App</h1>
         <menu className="flex">
           <Link to="/">Categories</Link>
-          <button>darkmode</button>
+          <ButtonDefault>Light Dark</ButtonDefault>
           <button onClick={handleOpen}>+</button>
         </menu>
         {open && <Form ref={formRef} />}
