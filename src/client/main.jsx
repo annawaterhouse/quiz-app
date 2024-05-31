@@ -6,7 +6,6 @@ import store from './store'
 import Root from './layout/Root'
 import Category from './layout/Category'
 import Decks from './layout/Decks'
-import './styles.scss'
 
 
 const router = createBrowserRouter([

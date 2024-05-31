@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
 import Form from "../../components/common/Form";
-import "./nav.scss";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);

@@ -13,7 +13,7 @@ export default function Saved() {
  if (isError) return
 
   return (
-    <section>
+    <section className="">
       <h1>Saved</h1>
       { mode ? (<Quiz saved={saved} />) : (<Learn saved={saved} />) }
     </section>

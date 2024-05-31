@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
+
 import { useGetCategoriesQuery } from "./quizSlice";
 import { useCreateCategoryMutation } from "./quizSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useDeleteCategoryMutation } from "./quizSlice";
 import DeletePopup from "./nav/DeletePopup";
-import "./decks.scss";
 
 function LinkCard({ name, id }) {
   const navigate = useNavigate();

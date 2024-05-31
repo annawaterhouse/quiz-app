@@ -2,7 +2,6 @@ import { useCreateCardMutation } from "../../layout/quizSlice";
 import { useGetCategoriesQuery } from "../../layout/quizSlice";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import "./form.scss";
 
 export default function Form({ setOpen }) {
   const [createCard] = useCreateCardMutation();

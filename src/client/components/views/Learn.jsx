@@ -1,5 +1,3 @@
-import "./learn.scss";
-
 export default function Learn({ cards, categoryCards, saved, setOpen}) {
   const data = cards || categoryCards || saved;
   console.log(data);
