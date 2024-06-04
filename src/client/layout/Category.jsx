@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState, useRef } from "react";
-import Form from "../universal/Form";
+import Form from "../universal/NewForm";
 
 export default function Category() {
 

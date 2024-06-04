@@ -2,8 +2,9 @@ import { useCreateCardMutation } from "../layout/quizSlice";
 import { useGetCategoriesQuery } from "../layout/quizSlice";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { Button } from "@/ui/button";
 
-export default function Form({ setOpen }) {
+export default function OldForm({ setOpen }) {
   const [createCard] = useCreateCardMutation();
   const { data: categories } = useGetCategoriesQuery();
   const {
@@ -27,9 +28,8 @@ export default function Form({ setOpen }) {
   console.log(data, "data from form");
 
   return (
-    <form className="form container" onSubmit={handleSubmit(onSubmit)}>
+    <form className="" onSubmit={handleSubmit(onSubmit)}>
       <h2>Create Card</h2>
-      <div className="grid">
         <select {...register("category", { required: true })}>
           <option value="">Category</option>
           {categories &&
@@ -50,8 +50,7 @@ export default function Form({ setOpen }) {
           placeholder="Answer"
         />
         {errors.answer && <span>This field is required</span>}
-        <input type="submit" />
-      </div>
+        <Button type="submit"></Button>
     </form>
   );
 }

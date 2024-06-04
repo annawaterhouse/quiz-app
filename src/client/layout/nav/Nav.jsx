@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import Form from "../../universal/Form";
-import ButtonDefault from "../../universal/ButtonDefault";
+import { Button } from "@/ui/button";
+
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -28,14 +28,14 @@ export default function Nav() {
   }, [open, handleClose]);
 
   return (
-    <nav className="flex container">
-        <h1 className="logo">Study App</h1>
+    <nav className="flex items-center gap-4 text-sm lg:gap-6">
+       <div className="text-lg font-semibold">Study App</div>
         <menu className="flex">
-          <Link to="/">Categories</Link>
-          <ButtonDefault>Light Dark</ButtonDefault>
-          <button onClick={handleOpen}>+</button>
+          <Button><Link to="/">Categories</Link></Button>
+          <Button>Dark Mode</Button>
+          <Button onClick={handleOpen}>+</Button>
         </menu>
-        {open && <Form ref={formRef} />}
+        {open && <OldForm ref={formRef} />}
     </nav>
   );
 }
